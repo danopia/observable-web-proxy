@@ -19,11 +19,7 @@ export const handleInboundRequest: Handler = (request, ...extras) => {
       origin: url.origin,
       path: url.pathname,
     },
-    statusCode: 200,
+    statusCode: 404,
   });
-
-  const body = `Your user-agent is:\n\n${request.headers.get(
-  "user-agent",
-  ) ?? "Unknown"}`;
-  return new Response(body, { status: 200 });
+  return new Response(`Access to ${JSON.stringify(url.origin)} is blocked within this environment.`, { status: 404 });
 }
