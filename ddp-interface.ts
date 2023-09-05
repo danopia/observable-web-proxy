@@ -2,7 +2,7 @@ import { DdpInterface, InboundDdpSocket } from "./ddp-impl.ts";
 
 export const ObservableWebProxyInterface = new DdpInterface();
 
-interface RequestDocument {
+export interface RequestDocument {
   _id: string;
   timestamp: Date;
   method: string;
@@ -52,14 +52,17 @@ observeRequest({
   _id: crypto.randomUUID(),
   timestamp: new Date(),
   method: 'GET',
-  requestUrl: 'https://example.org/healthz',
+  requestUrl: 'https://example.org/dummy-request',
   urlDetails: {
     origin: 'https://example.org',
     path: '/healthz',
   },
   bodyText: null,
 
-  statusCode: 200,
+  response: {
+    statusCode: 200,
+    bodyText: null,
+  },
 });
 
 ObservableWebProxyInterface.addPublication('/recent-requests', (socket, params, stopSignal) => {
