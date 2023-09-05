@@ -11,8 +11,12 @@ interface RequestDocument {
     origin: string;
     path: string;
   };
+  bodyText: string | null;
 
-  statusCode: number;
+  response?: {
+    statusCode: number;
+    bodyText: string | null;
+  };
 }
 
 const requestHistory = new Array<RequestDocument>();
@@ -53,6 +57,8 @@ observeRequest({
     origin: 'https://example.org',
     path: '/healthz',
   },
+  bodyText: null,
+
   statusCode: 200,
 });
 
